@@ -26,6 +26,7 @@ public class UserRepository {
 
     public List<User> getAllUsers() {
         Transaction transaction = null;
+        // проверь достижим ли случай получения null от этого метода, если да - плохо, хочется возвращать пустой список если нет данных
         List<User> users = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
@@ -39,7 +40,7 @@ public class UserRepository {
         }
         return users;
     }
-
+// тут я бы вернул пользователя сохраненного, так как можно будет увидеть id
     public void createUser(User user) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -52,7 +53,7 @@ public class UserRepository {
             }
         }
     }
-
+// тут я бы вернул пользователя сохраненного
     public void updateUser(User user) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -65,7 +66,8 @@ public class UserRepository {
             }
         }
     }
-
+    
+// тут не понимаю зачем возвращать юзера, можно просто void
     public User deleteUser(long id) {
         Transaction transaction = null;
         User user = null;
